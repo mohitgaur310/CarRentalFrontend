@@ -1,0 +1,513 @@
+{
+  "_readme": {
+    "instructions": [
+      "1. Create host users first (role: host) and replace hostId placeholders with real User _id values.",
+      "2. Insert cars using mongoimport or your seed script.",
+      "3. API base path: GET /api/v1/cars",
+      "4. location uses GeoJSON: coordinates are [longitude, latitude]"
+    ],
+    "hostIdPlaceholders": {
+      "HOST_RAJESH": "Replace with MongoDB _id of Rajesh Kumar (host)",
+      "HOST_PRIYA": "Replace with MongoDB _id of Priya Sharma (host)",
+      "HOST_AMIT": "Replace with MongoDB _id of Amit Patel (host)",
+      "HOST_SNEHA": "Replace with MongoDB _id of Sneha Reddy (host)",
+      "HOST_VIKRAM": "Replace with MongoDB _id of Vikram Singh (host)",
+      "HOST_KAVITA": "Replace with MongoDB _id of Kavita Nair (host)"
+    }
+  },
+  "cars": [
+    {
+      "title": "BMW 3 Series",
+      "brand": "BMW",
+      "model": "3 Series",
+      "year": 2024,
+      "category": "Luxury",
+      "transmission": "Automatic",
+      "fuelType": "Petrol",
+      "seats": 5,
+      "doors": 4,
+      "color": "Alpine White",
+      "registrationNumber": "DL01AB1234",
+      "pricePerDay": 4500,
+      "securityDeposit": 10000,
+      "mileageLimitPerDay": 200,
+      "extraKmCharge": 15,
+      "rating": 4.8,
+      "totalReviews": 124,
+      "city": "Delhi",
+      "state": "Delhi",
+      "isFeatured": true,
+      "isAvailable": true,
+      "status": "active",
+      "images": [
+        "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800",
+        "https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=800"
+      ],
+      "description": "Experience luxury and performance with the BMW 3 Series. Perfect for business trips and weekend getaways.",
+      "features": ["GPS Navigation", "Bluetooth", "Leather Seats", "Sunroof", "Backup Camera", "Cruise Control"],
+      "location": {
+        "type": "Point",
+        "coordinates": [77.209, 28.6139]
+      },
+      "address": {
+        "street": "Connaught Place",
+        "city": "Delhi",
+        "state": "Delhi",
+        "country": "India",
+        "pincode": "110001"
+      },
+      "hostId": "HOST_RAJESH"
+    },
+    {
+      "title": "Mercedes-Benz C-Class",
+      "brand": "Mercedes-Benz",
+      "model": "C-Class",
+      "year": 2023,
+      "category": "Luxury",
+      "transmission": "Automatic",
+      "fuelType": "Diesel",
+      "seats": 5,
+      "doors": 4,
+      "color": "Obsidian Black",
+      "registrationNumber": "MH02CD5678",
+      "pricePerDay": 5000,
+      "securityDeposit": 12000,
+      "mileageLimitPerDay": 200,
+      "extraKmCharge": 18,
+      "rating": 4.9,
+      "totalReviews": 98,
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "isFeatured": true,
+      "isAvailable": true,
+      "status": "active",
+      "images": [
+        "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800"
+      ],
+      "description": "Drive in style with the Mercedes-Benz C-Class. Elegant design meets cutting-edge technology.",
+      "features": ["GPS Navigation", "Premium Sound", "Leather Seats", "Panoramic Roof", "Ambient Lighting"],
+      "location": {
+        "type": "Point",
+        "coordinates": [72.8777, 19.076]
+      },
+      "address": {
+        "street": "Bandra Kurla Complex",
+        "city": "Mumbai",
+        "state": "Maharashtra",
+        "country": "India",
+        "pincode": "400051"
+      },
+      "hostId": "HOST_PRIYA"
+    },
+    {
+      "title": "Toyota Fortuner",
+      "brand": "Toyota",
+      "model": "Fortuner",
+      "year": 2024,
+      "category": "SUV",
+      "transmission": "Automatic",
+      "fuelType": "Diesel",
+      "seats": 7,
+      "doors": 5,
+      "color": "Super White",
+      "registrationNumber": "KA03EF9012",
+      "pricePerDay": 3500,
+      "securityDeposit": 8000,
+      "mileageLimitPerDay": 250,
+      "extraKmCharge": 12,
+      "rating": 4.7,
+      "totalReviews": 210,
+      "city": "Bangalore",
+      "state": "Karnataka",
+      "isFeatured": false,
+      "isAvailable": true,
+      "status": "active",
+      "images": [
+        "https://images.unsplash.com/photo-1519641471654-76cead7a7fe3?w=800"
+      ],
+      "description": "Spacious and powerful SUV perfect for family trips and off-road adventures.",
+      "features": ["4WD", "GPS Navigation", "7 Seats", "Roof Rails", "Rear AC Vents"],
+      "location": {
+        "type": "Point",
+        "coordinates": [77.5946, 12.9716]
+      },
+      "address": {
+        "street": "MG Road",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "country": "India",
+        "pincode": "560001"
+      },
+      "hostId": "HOST_AMIT"
+    },
+    {
+      "title": "Honda City",
+      "brand": "Honda",
+      "model": "City",
+      "year": 2023,
+      "category": "Sedan",
+      "transmission": "Automatic",
+      "fuelType": "Petrol",
+      "seats": 5,
+      "doors": 4,
+      "color": "Lunar Silver",
+      "registrationNumber": "DL04GH3456",
+      "pricePerDay": 1800,
+      "securityDeposit": 5000,
+      "mileageLimitPerDay": 200,
+      "extraKmCharge": 8,
+      "rating": 4.5,
+      "totalReviews": 156,
+      "city": "Delhi",
+      "state": "Delhi",
+      "isFeatured": false,
+      "isAvailable": true,
+      "status": "active",
+      "images": [
+        "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800"
+      ],
+      "description": "Reliable and fuel-efficient sedan ideal for city commuting.",
+      "features": ["GPS Navigation", "Bluetooth", "Cruise Control", "Rear Parking Sensors"],
+      "location": {
+        "type": "Point",
+        "coordinates": [77.391, 28.5355]
+      },
+      "address": {
+        "street": "Saket",
+        "city": "Delhi",
+        "state": "Delhi",
+        "country": "India",
+        "pincode": "110017"
+      },
+      "hostId": "HOST_SNEHA"
+    },
+    {
+      "title": "Tesla Model 3",
+      "brand": "Tesla",
+      "model": "Model 3",
+      "year": 2024,
+      "category": "Luxury",
+      "transmission": "Automatic",
+      "fuelType": "Electric",
+      "seats": 5,
+      "doors": 4,
+      "color": "Pearl White",
+      "registrationNumber": "MH05IJ7890",
+      "pricePerDay": 6000,
+      "securityDeposit": 15000,
+      "mileageLimitPerDay": 300,
+      "extraKmCharge": 20,
+      "rating": 4.9,
+      "totalReviews": 87,
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "isFeatured": true,
+      "isAvailable": true,
+      "status": "active",
+      "images": [
+        "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=800"
+      ],
+      "description": "Experience the future of driving with Tesla Model 3. Zero emissions, maximum performance.",
+      "features": ["Autopilot", "Supercharging", "Premium Interior", "Glass Roof", "Over-the-air Updates"],
+      "location": {
+        "type": "Point",
+        "coordinates": [72.8562, 19.0176]
+      },
+      "address": {
+        "street": "Lower Parel",
+        "city": "Mumbai",
+        "state": "Maharashtra",
+        "country": "India",
+        "pincode": "400013"
+      },
+      "hostId": "HOST_VIKRAM"
+    },
+    {
+      "title": "Maruti Swift",
+      "brand": "Maruti",
+      "model": "Swift",
+      "year": 2023,
+      "category": "Hatchback",
+      "transmission": "Manual",
+      "fuelType": "Petrol",
+      "seats": 5,
+      "doors": 4,
+      "color": "Fire Red",
+      "registrationNumber": "KA06KL1122",
+      "pricePerDay": 1200,
+      "securityDeposit": 3000,
+      "mileageLimitPerDay": 200,
+      "extraKmCharge": 6,
+      "rating": 4.3,
+      "totalReviews": 320,
+      "city": "Bangalore",
+      "state": "Karnataka",
+      "isFeatured": false,
+      "isAvailable": true,
+      "status": "active",
+      "images": [
+        "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800"
+      ],
+      "description": "Compact and economical hatchback perfect for city driving.",
+      "features": ["Bluetooth", "Power Windows", "ABS", "Dual Airbags"],
+      "location": {
+        "type": "Point",
+        "coordinates": [77.6245, 12.9352]
+      },
+      "address": {
+        "street": "Koramangala",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "country": "India",
+        "pincode": "560034"
+      },
+      "hostId": "HOST_KAVITA"
+    },
+    {
+      "title": "Hyundai Creta",
+      "brand": "Hyundai",
+      "model": "Creta",
+      "year": 2024,
+      "category": "SUV",
+      "transmission": "Automatic",
+      "fuelType": "Petrol",
+      "seats": 5,
+      "doors": 5,
+      "color": "Polar White",
+      "registrationNumber": "DL07MN3344",
+      "pricePerDay": 2800,
+      "securityDeposit": 6000,
+      "mileageLimitPerDay": 200,
+      "extraKmCharge": 10,
+      "rating": 4.6,
+      "totalReviews": 178,
+      "city": "Delhi",
+      "state": "Delhi",
+      "isFeatured": true,
+      "isAvailable": true,
+      "status": "active",
+      "images": [
+        "https://images.unsplash.com/photo-1609521263047-f8f205293bb4?w=800"
+      ],
+      "description": "Popular mid-size SUV with premium features and comfortable ride for family outings.",
+      "features": ["Sunroof", "Ventilated Seats", "Wireless Charging", "360 Camera", "Apple CarPlay"],
+      "location": {
+        "type": "Point",
+        "coordinates": [77.1025, 28.7041]
+      },
+      "address": {
+        "street": "Rohini Sector 18",
+        "city": "Delhi",
+        "state": "Delhi",
+        "country": "India",
+        "pincode": "110089"
+      },
+      "hostId": "HOST_RAJESH"
+    },
+    {
+      "title": "Mahindra Thar",
+      "brand": "Mahindra",
+      "model": "Thar",
+      "year": 2023,
+      "category": "SUV",
+      "transmission": "Manual",
+      "fuelType": "Diesel",
+      "seats": 4,
+      "doors": 3,
+      "color": "Napoli Black",
+      "registrationNumber": "RJ08OP5566",
+      "pricePerDay": 3200,
+      "securityDeposit": 7000,
+      "mileageLimitPerDay": 250,
+      "extraKmCharge": 12,
+      "rating": 4.7,
+      "totalReviews": 142,
+      "city": "Jaipur",
+      "state": "Rajasthan",
+      "isFeatured": false,
+      "isAvailable": true,
+      "status": "active",
+      "images": [
+        "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800"
+      ],
+      "description": "Iconic off-roader built for adventure. Perfect for desert trips and rugged terrain.",
+      "features": ["4x4", "Removable Hard Top", "Touchscreen Infotainment", "Hill Hold Assist"],
+      "location": {
+        "type": "Point",
+        "coordinates": [75.7873, 26.9124]
+      },
+      "address": {
+        "street": "MI Road",
+        "city": "Jaipur",
+        "state": "Rajasthan",
+        "country": "India",
+        "pincode": "302001"
+      },
+      "hostId": "HOST_AMIT"
+    },
+    {
+      "title": "Audi A4",
+      "brand": "Audi",
+      "model": "A4",
+      "year": 2023,
+      "category": "Luxury",
+      "transmission": "Automatic",
+      "fuelType": "Petrol",
+      "seats": 5,
+      "doors": 4,
+      "color": "Daytona Grey",
+      "registrationNumber": "MH09QR7788",
+      "pricePerDay": 5500,
+      "securityDeposit": 13000,
+      "mileageLimitPerDay": 200,
+      "extraKmCharge": 18,
+      "rating": 4.8,
+      "totalReviews": 76,
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "isFeatured": true,
+      "isAvailable": true,
+      "status": "active",
+      "images": [
+        "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800"
+      ],
+      "description": "Premium German sedan with quattro all-wheel drive and refined interior.",
+      "features": ["Virtual Cockpit", "Matrix LED", "Bang & Olufsen Sound", "Leather Interior"],
+      "location": {
+        "type": "Point",
+        "coordinates": [72.8311, 18.922]
+      },
+      "address": {
+        "street": "Nariman Point",
+        "city": "Mumbai",
+        "state": "Maharashtra",
+        "country": "India",
+        "pincode": "400021"
+      },
+      "hostId": "HOST_PRIYA"
+    },
+    {
+      "title": "Kia Seltos",
+      "brand": "Kia",
+      "model": "Seltos",
+      "year": 2024,
+      "category": "SUV",
+      "transmission": "Automatic",
+      "fuelType": "Petrol",
+      "seats": 5,
+      "doors": 5,
+      "color": "Gravity Grey",
+      "registrationNumber": "TS10ST9900",
+      "pricePerDay": 2400,
+      "securityDeposit": 5500,
+      "mileageLimitPerDay": 200,
+      "extraKmCharge": 9,
+      "rating": 4.5,
+      "totalReviews": 95,
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "isFeatured": false,
+      "isAvailable": true,
+      "status": "active",
+      "images": [
+        "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800"
+      ],
+      "description": "Feature-packed compact SUV with bold design and smooth automatic transmission.",
+      "features": ["Panoramic Sunroof", "BOSE Audio", "Connected Car Tech", "ADAS"],
+      "location": {
+        "type": "Point",
+        "coordinates": [78.4867, 17.385]
+      },
+      "address": {
+        "street": "Banjara Hills",
+        "city": "Hyderabad",
+        "state": "Telangana",
+        "country": "India",
+        "pincode": "500034"
+      },
+      "hostId": "HOST_SNEHA"
+    },
+    {
+      "title": "Toyota Innova Crysta",
+      "brand": "Toyota",
+      "model": "Innova Crysta",
+      "year": 2023,
+      "category": "Van",
+      "transmission": "Automatic",
+      "fuelType": "Diesel",
+      "seats": 7,
+      "doors": 5,
+      "color": "Silver Metallic",
+      "registrationNumber": "GJ11UV2233",
+      "pricePerDay": 3800,
+      "securityDeposit": 8000,
+      "mileageLimitPerDay": 300,
+      "extraKmCharge": 12,
+      "rating": 4.8,
+      "totalReviews": 265,
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "isFeatured": false,
+      "isAvailable": true,
+      "status": "active",
+      "images": [
+        "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800"
+      ],
+      "description": "India's most trusted MPV. Ideal for large families and outstation group travel.",
+      "features": ["Captain Seats", "Rear AC", "Large Boot", "Touchscreen", "Cruise Control"],
+      "location": {
+        "type": "Point",
+        "coordinates": [72.5714, 23.0225]
+      },
+      "address": {
+        "street": "SG Highway",
+        "city": "Ahmedabad",
+        "state": "Gujarat",
+        "country": "India",
+        "pincode": "380015"
+      },
+      "hostId": "HOST_VIKRAM"
+    },
+    {
+      "title": "Porsche 911 Carrera",
+      "brand": "Porsche",
+      "model": "911 Carrera",
+      "year": 2022,
+      "category": "Sports",
+      "transmission": "Automatic",
+      "fuelType": "Petrol",
+      "seats": 4,
+      "doors": 2,
+      "color": "Guards Red",
+      "registrationNumber": "DL12WX4455",
+      "pricePerDay": 15000,
+      "securityDeposit": 50000,
+      "mileageLimitPerDay": 150,
+      "extraKmCharge": 50,
+      "rating": 5.0,
+      "totalReviews": 34,
+      "city": "Delhi",
+      "state": "Delhi",
+      "isFeatured": true,
+      "isAvailable": true,
+      "status": "active",
+      "images": [
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800"
+      ],
+      "description": "Legendary sports car for the ultimate driving experience. Weekend special rental.",
+      "features": ["Sport Chrono Package", "PASM", "BOSE Surround", "Sport Exhaust", "Launch Control"],
+      "location": {
+        "type": "Point",
+        "coordinates": [77.1909, 28.5562]
+      },
+      "address": {
+        "street": "Aerocity",
+        "city": "Delhi",
+        "state": "Delhi",
+        "country": "India",
+        "pincode": "110037"
+      },
+      "hostId": "HOST_RAJESH"
+    }
+  ]
+}
