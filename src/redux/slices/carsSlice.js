@@ -68,6 +68,66 @@ export const fetchSimilarCars = createAsyncThunk(
   }
 );
 
+export const fetchMyCars = createAsyncThunk(
+  'cars/fetchMy',
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = await carApi.getMyCars(params);
+      return parseCarsResponse(response);
+    } catch (error) {
+      return rejectWithValue(getErrorMessage(error));
+    }
+  }
+);
+
+export const fetchMyCarById = createAsyncThunk(
+  'cars/fetchMyById',
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await carApi.getMyCarById(id);
+      return mapApiCar(response.data);
+    } catch (error) {
+      return rejectWithValue(getErrorMessage(error));
+    }
+  }
+);
+
+export const createCar = createAsyncThunk(
+  'cars/create',
+  async (carData, { rejectWithValue }) => {
+    try {
+      const response = await carApi.createCar(carData);
+      return mapApiCar(response.data);
+    } catch (error) {
+      return rejectWithValue(getErrorMessage(error));
+    }
+  }
+);
+
+export const updateCar = createAsyncThunk(
+  'cars/update',
+  async ({ id, ...carData }, { rejectWithValue }) => {
+    try {
+      const response = await carApi.updateCar(id, carData);
+      return mapApiCar(response.data);
+    } catch (error) {
+      return rejectWithValue(getErrorMessage(error));
+    }
+  }
+);
+
+export const deleteCar = createAsyncThunk(
+  'cars/delete',
+  async (id, { rejectWithValue }) => {
+    try {
+      await carApi.deleteCar(id);
+      return id;
+    } catch (error) {
+      return rejectWithValue(getErrorMessage(error));
+    }
+  }
+);
+
 const carsSlice = createSlice({
   name: 'cars',
   initialState: {
@@ -76,6 +136,8 @@ const carsSlice = createSlice({
     popularCars: [],
     selectedCar: null,
     similarCars: [],
+    myCars: [],
+    editingCar: null,
     filters: {},
     pagination: { page: 1, limit: 12, total: 0, totalPages: 1 },
     loading: false,
@@ -91,6 +153,9 @@ const carsSlice = createSlice({
     clearSelectedCar: (state) => {
       state.selectedCar = null;
       state.similarCars = [];
+    },
+    clearEditingCar: (state) => {
+      state.editingCar = null;
     },
   },
   extraReducers: (builder) => {
@@ -137,9 +202,46 @@ const carsSlice = createSlice({
       })
       .addCase(fetchSimilarCars.fulfilled, (state, action) => {
         state.similarCars = action.payload;
+      })
+      .addCase(fetchMyCars.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchMyCars.fulfilled, (state, action) => {
+        state.loading = false;
+        state.myCars = action.payload.cars;
+        state.pagination = action.payload.pagination;
+      })
+      .addCase(fetchMyCars.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(fetchMyCarById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchMyCarById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.editingCar = action.payload;
+      })
+      .addCase(fetchMyCarById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.editingCar = null;
+      })
+      .addCase(createCar.fulfilled, (state, action) => {
+        state.myCars.unshift(action.payload);
+      })
+      .addCase(updateCar.fulfilled, (state, action) => {
+        const idx = state.myCars.findIndex((c) => c.id === action.payload.id);
+        if (idx !== -1) state.myCars[idx] = action.payload;
+        state.editingCar = action.payload;
+      })
+      .addCase(deleteCar.fulfilled, (state, action) => {
+        state.myCars = state.myCars.filter((c) => c.id !== action.payload);
       });
   },
 });
 
-export const { setFilters, clearFilters, clearSelectedCar } = carsSlice.actions;
+export const { setFilters, clearFilters, clearSelectedCar, clearEditingCar } = carsSlice.actions;
 export default carsSlice.reducer;

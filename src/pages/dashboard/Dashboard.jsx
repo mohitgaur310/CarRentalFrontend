@@ -1,22 +1,32 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FiTruck, FiCalendar, FiCreditCard, FiStar } from 'react-icons/fi';
+import { useDispatch, useSelector } from 'react-redux';
+import { FiTruck, FiCalendar } from 'react-icons/fi';
 import Button from '../../components/Buttons/Button';
 import BookingCard from '../../components/Cards/BookingCard';
-import { mockCars } from '../../services/mockData';
-import { formatCurrency } from '../../utils';
-
-const stats = [
-  { label: 'My Cars', value: '3', icon: FiTruck, color: 'bg-blue-100 text-blue-600' },
-  { label: 'Active Bookings', value: '2', icon: FiCalendar, color: 'bg-green-100 text-green-600' },
-  { label: 'Total Earnings', value: formatCurrency(125000), icon: FiCreditCard, color: 'bg-purple-100 text-purple-600' },
-  { label: 'Avg Rating', value: '4.8', icon: FiStar, color: 'bg-yellow-100 text-yellow-600' },
-];
-
-const recentBookings = [
-  { id: '1', car: mockCars[0], startDate: '2026-07-01', endDate: '2026-07-05', status: 'confirmed', totalAmount: 22500 },
-];
+import { fetchMyCars } from '../../redux/slices/carsSlice';
+import { fetchHostBookings } from '../../redux/slices/bookingsSlice';
+import { BOOKING_STATUS } from '../../constants';
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const { myCars } = useSelector((state) => state.cars);
+  const { hostBookings } = useSelector((state) => state.bookings);
+
+  useEffect(() => {
+    dispatch(fetchMyCars({ limit: 100 }));
+    dispatch(fetchHostBookings({ limit: 5 }));
+  }, [dispatch]);
+
+  const activeBookings = hostBookings.filter((b) =>
+    [BOOKING_STATUS.PENDING, BOOKING_STATUS.ACCEPTED, BOOKING_STATUS.ONGOING].includes(b.status)
+  );
+
+  const stats = [
+    { label: 'My Cars', value: String(myCars.length), icon: FiTruck, color: 'bg-blue-100 text-blue-600' },
+    { label: 'Active Bookings', value: String(activeBookings.length), icon: FiCalendar, color: 'bg-green-100 text-green-600' },
+  ];
+
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
@@ -27,7 +37,7 @@ const Dashboard = () => {
         <Link to="/dashboard/add-car"><Button>Add New Car</Button></Link>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
         {stats.map((stat) => (
           <div key={stat.label} className="bg-white rounded-xl border border-gray-100 p-5">
             <div className="flex items-center gap-3">
@@ -42,9 +52,13 @@ const Dashboard = () => {
       </div>
 
       <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Bookings</h2>
-      <div className="space-y-4">
-        {recentBookings.map((b) => <BookingCard key={b.id} booking={b} />)}
-      </div>
+      {hostBookings.length > 0 ? (
+        <div className="space-y-4">
+          {hostBookings.slice(0, 5).map((b) => <BookingCard key={b.id} booking={b} showRenter />)}
+        </div>
+      ) : (
+        <p className="text-gray-500">No bookings yet.</p>
+      )}
     </div>
   );
 };

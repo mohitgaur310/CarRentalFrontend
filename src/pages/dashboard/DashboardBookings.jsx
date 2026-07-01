@@ -1,19 +1,34 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import BookingCard from '../../components/Cards/BookingCard';
-import { mockCars } from '../../services/mockData';
+import PageLoader from '../../components/Loader/PageLoader';
+import { fetchHostBookings } from '../../redux/slices/bookingsSlice';
 
 const DashboardBookings = () => {
-  const bookings = [
-    { id: '1', car: mockCars[0], startDate: '2026-07-01', endDate: '2026-07-05', status: 'confirmed', totalAmount: 22500 },
-    { id: '2', car: mockCars[1], startDate: '2026-06-20', endDate: '2026-06-22', status: 'active', totalAmount: 10000 },
-    { id: '3', car: mockCars[2], startDate: '2026-06-01', endDate: '2026-06-04', status: 'completed', totalAmount: 10500 },
-  ];
+  const dispatch = useDispatch();
+  const { hostBookings, loading, error } = useSelector((state) => state.bookings);
+
+  useEffect(() => {
+    dispatch(fetchHostBookings());
+  }, [dispatch]);
+
+  if (loading && hostBookings.length === 0) {
+    return <PageLoader />;
+  }
 
   return (
     <div>
       <h1 className="text-2xl font-bold text-gray-900 mb-8">Bookings</h1>
-      <div className="space-y-4">
-        {bookings.map((b) => <BookingCard key={b.id} booking={b} />)}
-      </div>
+      {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+      {hostBookings.length > 0 ? (
+        <div className="space-y-4">
+          {hostBookings.map((b) => (
+            <BookingCard key={b.id} booking={b} showRenter />
+          ))}
+        </div>
+      ) : (
+        <p className="text-gray-500">No bookings on your cars yet.</p>
+      )}
     </div>
   );
 };

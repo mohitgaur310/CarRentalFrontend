@@ -2,8 +2,9 @@ import axios from './axios';
 
 export const bookingApi = {
   createBooking: (data) => axios.post('/bookings', data),
-  getBookings: (params) => axios.get('/bookings', { params }),
+  getMyBookings: (params) => axios.get('/bookings/my', { params }),
+  getHostBookings: (params) => axios.get('/bookings/host', { params }),
+  getHostCarBookings: (carId, params) => axios.get(`/bookings/host/cars/${carId}`, { params }),
   getBookingById: (id) => axios.get(`/bookings/${id}`),
-  updateBooking: (id, data) => axios.patch(`/bookings/${id}`, data),
-  cancelBooking: (id) => axios.delete(`/bookings/${id}`),
+  updateBookingStatus: (id, data) => axios.patch(`/bookings/${id}/status`, data),
 };

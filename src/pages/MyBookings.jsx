@@ -1,37 +1,36 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import BookingCard from '../components/Cards/BookingCard';
 import Breadcrumb from '../components/Common/Breadcrumb';
 import Button from '../components/Buttons/Button';
-import { mockCars } from '../services/mockData';
-
-const mockBookings = [
-  {
-    id: '1',
-    car: mockCars[0],
-    startDate: '2026-07-01',
-    endDate: '2026-07-05',
-    status: 'confirmed',
-    totalAmount: 22500,
-  },
-  {
-    id: '2',
-    car: mockCars[2],
-    startDate: '2026-06-15',
-    endDate: '2026-06-18',
-    status: 'completed',
-    totalAmount: 10500,
-  },
-];
+import PageLoader from '../components/Loader/PageLoader';
+import { fetchMyBookings } from '../redux/slices/bookingsSlice';
 
 const MyBookings = () => {
+  const dispatch = useDispatch();
+  const { bookings, loading, error } = useSelector((state) => state.bookings);
+
+  useEffect(() => {
+    dispatch(fetchMyBookings());
+  }, [dispatch]);
+
+  if (loading && bookings.length === 0) {
+    return <PageLoader />;
+  }
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <Breadcrumb items={[{ label: 'My Bookings' }]} />
       <h1 className="text-2xl font-bold text-gray-900 mb-8">My Bookings</h1>
 
-      {mockBookings.length > 0 ? (
+      {error && (
+        <p className="text-red-500 text-sm mb-4">{error}</p>
+      )}
+
+      {bookings.length > 0 ? (
         <div className="space-y-4">
-          {mockBookings.map((booking) => (
+          {bookings.map((booking) => (
             <BookingCard key={booking.id} booking={booking} />
           ))}
         </div>

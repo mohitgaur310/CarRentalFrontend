@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const CategoryCard = ({ category }) => {
   return (
-    <Link to={`/search?category=${category.name}`}>
+    <Link to={`/search?category=${encodeURIComponent(category.name)}`} className="block">
       <motion.div
         whileHover={{ scale: 1.05 }}
         className="flex flex-col items-center p-6 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer"

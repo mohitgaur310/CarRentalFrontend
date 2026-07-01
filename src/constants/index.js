@@ -55,10 +55,11 @@ export const CAR_CATEGORIES = ['Sedan', 'SUV', 'Hatchback', 'Luxury', 'Sports', 
 
 export const BOOKING_STATUS = {
   PENDING: 'pending',
-  CONFIRMED: 'confirmed',
-  ACTIVE: 'active',
-  COMPLETED: 'completed',
+  ACCEPTED: 'accepted',
+  REJECTED: 'rejected',
   CANCELLED: 'cancelled',
+  ONGOING: 'ongoing',
+  COMPLETED: 'completed',
 };
 
 export const PAYMENT_STATUS = {

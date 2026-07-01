@@ -9,8 +9,10 @@ import CarCard from '../components/Cards/CarCard';
 import CategoryCard from '../components/Cards/CategoryCard';
 import ReviewCard from '../components/Cards/ReviewCard';
 import { CarCardSkeleton } from '../components/Loader/Skeleton';
-import { mockCategories, mockTestimonials } from '../services/mockData';
+import { mockTestimonials } from '../services/mockData';
 import { fetchFeaturedCars, fetchPopularCars } from '../redux/slices/carsSlice';
+import { carApi } from '../api/car.api';
+import { mapApiCategories } from '../utils/carMapper';
 
 const Hero = () => (
   <section className="relative bg-gradient-to-br from-primary-600 to-primary-800 text-white overflow-hidden">
@@ -67,11 +69,27 @@ const SearchBar = () => {
 const Home = () => {
   const dispatch = useDispatch();
   const { featuredCars, popularCars, loading } = useSelector((state) => state.cars);
+  const [categories, setCategories] = useState([]);
+  const [categoriesLoading, setCategoriesLoading] = useState(true);
 
   useEffect(() => {
     dispatch(fetchFeaturedCars(6));
     dispatch(fetchPopularCars(4));
   }, [dispatch]);
+
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const response = await carApi.getCategories();
+        setCategories(mapApiCategories(response.data));
+      } catch {
+        setCategories([]);
+      } finally {
+        setCategoriesLoading(false);
+      }
+    };
+    loadCategories();
+  }, []);
 
   return (
     <>
@@ -81,9 +99,13 @@ const Home = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h2 className="text-2xl font-bold text-gray-900 mb-8">Browse by Category</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {mockCategories.map((cat) => (
-            <CategoryCard key={cat.id} category={cat} />
-          ))}
+          {categoriesLoading
+            ? Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="h-36 bg-gray-200 rounded-xl animate-pulse" />
+              ))
+            : categories.map((cat) => (
+                <CategoryCard key={cat.id} category={cat} />
+              ))}
         </div>
       </section>
 

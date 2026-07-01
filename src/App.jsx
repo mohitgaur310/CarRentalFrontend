@@ -3,11 +3,13 @@ import { Provider } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
 import store from './redux/store';
 import AppRoutes from './routes';
+import ScrollToTop from './components/Common/ScrollToTop';
 
 function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
+        <ScrollToTop />
         <AppRoutes />
         <Toaster
           position="top-right"

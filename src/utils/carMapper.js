@@ -91,3 +91,25 @@ export const mapApiCars = (cars = []) => {
   if (!Array.isArray(cars)) return [];
   return cars.map(mapApiCar).filter(Boolean);
 };
+
+export const CATEGORY_ICONS = {
+  Sedan: '🚗',
+  SUV: '🚙',
+  Hatchback: '🚘',
+  Luxury: '✨',
+  Sports: '🏎️',
+  Van: '🚐',
+};
+
+export const mapApiCategory = (item) => ({
+  id: item.slug || item.category?.toLowerCase(),
+  name: item.category,
+  slug: item.slug,
+  count: item.count ?? 0,
+  icon: CATEGORY_ICONS[item.category] || '🚗',
+});
+
+export const mapApiCategories = (categories = []) => {
+  if (!Array.isArray(categories)) return [];
+  return categories.map(mapApiCategory);
+};
